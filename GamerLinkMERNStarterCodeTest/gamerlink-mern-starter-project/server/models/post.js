@@ -1,13 +1,28 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const postSchema = new Schema({
-  name: { type: "String", required: true },
-  title: { type: "String", required: true },
-  content: { type: "String", required: true },
-  slug: { type: "String", required: true },
-  cuid: { type: "String", required: true },
-  dateAdded: { type: "Date", default: Date.now, required: true }
+const playerSchema = new Schema({
+  displayName: { type: "String", required: true },
+  lastUpdated: { type: "String", required: true },
+  rankings: [
+    {
+      rank: String,
+      type: {
+        type: { type: String }
+      },
+      rating: String,
+      gamesPlayed: String,
+      topPercentile: String,
+      rankImage: String
+    }
+  ],
+  stats: [
+    {
+      saves: String,
+      goals: String,
+      wins: String
+    }
+  ]
 });
 
-export default mongoose.model("Post", postSchema);
+export default mongoose.model("Players", playerSchema);
