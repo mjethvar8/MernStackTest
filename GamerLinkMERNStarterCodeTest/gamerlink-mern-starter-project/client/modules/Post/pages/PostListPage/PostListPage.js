@@ -17,15 +17,9 @@ import { toggleAddPost } from "../../../App/AppActions";
 import { getShowAddPost } from "../../../App/AppReducer";
 import { getPosts } from "../../PostReducer";
 
-import { getData } from "../../../../../../data.json";
-
 class PostListPage extends Component {
   constructor() {
     super();
-
-    this.state = {
-      playerData: getData
-    };
   }
   componentDidMount() {
     this.props.dispatch(fetchPosts());
@@ -44,9 +38,6 @@ class PostListPage extends Component {
   };
 
   render() {
-    const { playerData } = this.state;
-
-    const playerName = playerData;
     return (
       <div>
         <PostCreateWidget
@@ -80,9 +71,11 @@ function mapStateToProps(state) {
 PostListPage.propTypes = {
   posts: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      content: PropTypes.string.isRequired
+      _id: PropTypes.string.isRequired,
+      displayName: PropTypes.string.isRequired,
+      lastUpdated: PropTypes.string.isRequired,
+      rankings: PropTypes.object(PropTypes.string),
+      stats: PropTypes.array(PropTypes.string)
     })
   ).isRequired,
   showAddPost: PropTypes.bool.isRequired,
