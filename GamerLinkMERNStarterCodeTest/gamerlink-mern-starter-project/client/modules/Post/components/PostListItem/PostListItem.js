@@ -6,31 +6,64 @@ import { FormattedMessage } from "react-intl";
 import styles from "./PostListItem.css";
 
 function PostListItem(props) {
+  var imagePath = images;
+  console.log(imagePath);
   return (
     <div className={styles["single-post"]}>
-      <h3 className={styles["post-title"]}>{props.post.displayName}</h3>
-      <p>{props.post.lastUpdated}</p>
-      {props.post.rankings.map(ranks => (
-        <div>
-          <p>Rank: {ranks.rank}</p>
-          <p>Type: {ranks.type}</p>
-          <p>Rating: {ranks.rating}</p>
-          <p>Games Played: {ranks.gamesPlayed}</p>
-          <p>Top Percentile: {ranks.topPercentile}%</p>
-        </div>
-      ))}
+      <div className={styles["heading"]}>
+        <h3 className={styles["post-title"]}>{props.post.displayName}</h3>
+      </div>
+      <div className={styles["heading"]}>
+        <p>{props.post.lastUpdated}</p>
+      </div>
       {props.post.stats.map(stat => (
-        <div>
-          <p>Saves: {stat.saves}</p>
-          <p>Goals: {stat.goals}</p>
-          <p>Wins: {stat.wins}</p>
+        <div className={styles["statsDiv"]}>
+          <div className={styles["background"]}>
+            <span className={styles["value"]}>{stat.wins}</span>
+            <span className={styles["title"]}>Wins</span>
+          </div>
+          <div className={styles["background"]}>
+            <span className={styles["value"]}>{stat.goals}</span>
+            <span className={styles["title"]}>Goals</span>
+          </div>
+          <div className={styles["background"]}>
+            <span className={styles["value"]}>{stat.saves}</span>
+            <span className={styles["title"]}>Saves</span>
+          </div>
         </div>
       ))}
-      <p className={styles["post-action"]}>
-        <a href="#" onClick={props.onDelete}>
-          <FormattedMessage id="deletePost" />
-        </a>
-      </p>
+      {props.post.rankings.map(ranks => (
+        <div className={styles["ranked"]}>
+          <div className={styles["rankType"]}>
+            <p>{ranks.type}</p>
+          </div>
+          <div className={styles["rankInfo"]}>
+            <div className={styles["rankedItems"]}>
+              <span className={styles["value"]}>{ranks.gamesPlayed}</span>
+              <p className={styles["subTitle"]}>Games Played</p>
+            </div>
+            <div className={styles["rankedItems"]}>
+              <span className={styles["value"]}>{ranks.topPercentile}%</span>
+              <p className={styles["subTitle"]}>Top Percentile</p>
+            </div>
+            <div className={styles["endSection"]}>
+              <div className={styles["rankedImage"]}>
+                <div className={styles["rankRating"]}>
+                  <span className={styles["value"]}>{ranks.rating}</span>
+                  <p className={styles["subTitle"]}>{ranks.rank}}</p>
+                </div>
+
+                <img
+                  className={styles["img"]}
+                  src={require("../../../../../../images/ranks/" +
+                    ranks.rankImage +
+                    ".png")}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
       <hr className={styles.divider} />
     </div>
   );
