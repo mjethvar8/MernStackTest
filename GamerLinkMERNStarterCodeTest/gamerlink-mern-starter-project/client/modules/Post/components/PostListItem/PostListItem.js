@@ -6,8 +6,9 @@ import { FormattedMessage } from "react-intl";
 import styles from "./PostListItem.css";
 
 function PostListItem(props) {
-  var imagePath = images;
-  console.log(imagePath);
+  //src={require("../../../../../../images/ranks/" +
+  //ranks.rankImage +
+  //".png")}
   return (
     <div className={styles["single-post"]}>
       <div className={styles["heading"]}>
@@ -53,12 +54,7 @@ function PostListItem(props) {
                   <p className={styles["subTitle"]}>{ranks.rank}}</p>
                 </div>
 
-                <img
-                  className={styles["img"]}
-                  src={require("../../../../../../images/ranks/" +
-                    ranks.rankImage +
-                    ".png")}
-                />
+                <img className={styles["img"]} />
               </div>
             </div>
           </div>

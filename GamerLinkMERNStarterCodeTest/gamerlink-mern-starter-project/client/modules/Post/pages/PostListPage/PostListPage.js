@@ -16,6 +16,9 @@ import { toggleAddPost } from "../../../App/AppActions";
 // Import Selectors
 import { getShowAddPost } from "../../../App/AppReducer";
 import { getPosts } from "../../PostReducer";
+import { getPost } from "../../PostReducer";
+
+import styles from "./../PostListPage/PostListPage.css";
 
 class PostListPage extends Component {
   constructor() {
@@ -39,7 +42,16 @@ class PostListPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className={styles["listView"]}>
+        <div className={styles["inputRow"]}>
+          <form>
+            <input
+              type="text"
+              className={styles["lookUpUser"]}
+              placeholder="Look up user"
+            />
+          </form>
+        </div>
         <PostCreateWidget
           addPost={this.handleAddPost}
           showAddPost={this.props.showAddPost}
@@ -52,7 +64,6 @@ class PostListPage extends Component {
     );
   }
 }
-
 // Actions required to provide data for this component to render in sever side.
 PostListPage.need = [
   () => {

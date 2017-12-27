@@ -1,0 +1,31 @@
+.lookUpUser {
+  background-color: #ffffff;
+  border: 1px outset #e8e8e8;
+  opacity: 1;
+  border-radius: 3px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.13), 0px 1px 3px rgba(0, 0, 0, 0.1),
+    -1px -2px 2px rgba(0, 0, 0, 0.05);
+  height: 36px;
+  width: 432px;
+  font-size-adjust: inherit;
+  background: url(./../../../../../../images/icons/search.png) no-repeat;
+  background-position: 10px;
+  background-position-x: right;
+}
+
+.inputRow {
+  display: flex;
+  flex-flow: row;
+  flex-direction: row;
+  padding-bottom: 30px;
+}
+
+input {
+  padding: 10px;
+}
+
+.listView {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
