@@ -1,23 +1,32 @@
-import { ADD_POST, ADD_POSTS, DELETE_POST } from './PostActions';
+import {
+  ADD_POST,
+  ADD_POSTS,
+  DELETE_POST,
+  SET_SEARCH_BAR
+} from "./PostActions";
 
 // Initial State
 const initialState = { data: [] };
 
 const PostReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST :
+    case ADD_POST:
       return {
-        data: [action.post, ...state.data],
+        data: [action.post, ...state.data]
       };
 
-    case ADD_POSTS :
+    case SET_SEARCH_BAR: {
+      return { data: action.keyword };
+    }
+
+    case ADD_POSTS:
       return {
-        data: action.posts,
+        data: action.posts
       };
 
-    case DELETE_POST :
+    case DELETE_POST:
       return {
-        data: state.data.filter(post => post.cuid !== action.cuid),
+        data: state.data.filter(post => post.displayName !== action.displayName)
       };
 
     default:
@@ -31,7 +40,8 @@ const PostReducer = (state = initialState, action) => {
 export const getPosts = state => state.posts.data;
 
 // Get post by cuid
-export const getPost = (state, cuid) => state.posts.data.filter(post => post.cuid === cuid)[0];
+export const getPost = (state, displayName) =>
+  state.posts.data.filter(post => post.displayName === displayName)[0];
 
 // Export Reducer
 export default PostReducer;

@@ -10,7 +10,8 @@ import {
   addPostRequest,
   fetchPosts,
   deletePostRequest,
-  fetchPost
+  fetchPost,
+  setSearchBar
 } from "../../PostActions";
 import { toggleAddPost } from "../../../App/AppActions";
 
@@ -24,13 +25,20 @@ import styles from "./../PostListPage/PostListPage.css";
 class PostListPage extends Component {
   constructor() {
     super();
+
+    this.setSearchBar = this.setSearchBar.bind(this);
   }
 
   componentDidMount() {
     this.props.dispatch(fetchPosts());
   }
 
+  setSearchBar(event) {
+    this.props.dispatch(fetchPost(event.target.value.toLowerCase()));
+  }
+
   render() {
+    const { searchBar } = this.props;
     return (
       <div className={styles["listView"]}>
         <form>
@@ -38,10 +46,14 @@ class PostListPage extends Component {
             type="text"
             className={styles["lookUpUser"]}
             placeholder="Look up user"
-            onChange={evt => this.queryPosts(evt)}
+            onChange={this.setSearchBar}
           />
         </form>
-        <PostList posts={this.props.posts} />
+        <PostList
+          setSearchBar={this.setSearchBar}
+          posts={this.props.posts}
+          searchBar={searchBar}
+        />
       </div>
     );
   }
@@ -56,7 +68,8 @@ PostListPage.need = [
 // Retrieve data from store as props
 function mapStateToProps(state) {
   return {
-    posts: getPosts(state)
+    posts: getPosts(state),
+    searchBar: setSearchBar(state)
   };
 }
 
@@ -70,7 +83,6 @@ PostListPage.propTypes = {
       stats: PropTypes.array(PropTypes.string)
     })
   ).isRequired,
-  showAddPost: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired
 };
 

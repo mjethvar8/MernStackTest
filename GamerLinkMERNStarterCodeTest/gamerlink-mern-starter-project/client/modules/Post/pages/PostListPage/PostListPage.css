@@ -11,6 +11,7 @@
   background: url(./../../../../../../images/icons/search.png) no-repeat;
   background-position: 10px;
   background-position-x: right;
+  margin-bottom: 20px;
 }
 
 .inputRow {

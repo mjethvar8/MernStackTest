@@ -6,9 +6,6 @@ import { FormattedMessage } from "react-intl";
 import styles from "./PostListItem.css";
 
 function PostListItem(props) {
-  //src={require("../../../../../../images/ranks/" +
-  //ranks.rankImage +
-  //".png")}
   return (
     <div className={styles["single-post"]}>
       <div className={styles["heading"]}>
@@ -53,8 +50,12 @@ function PostListItem(props) {
                   <span className={styles["value"]}>{ranks.rating}</span>
                   <p className={styles["subTitle"]}>{ranks.rank}}</p>
                 </div>
-
-                <img className={styles["img"]} />
+                <img
+                  className={styles["img"]}
+                  src={require("./../../../../../../images/ranks/" +
+                    ranks.rankImage +
+                    ".png")}
+                />
               </div>
             </div>
           </div>
@@ -72,7 +73,6 @@ PostListItem.propTypes = {
     lastUpdated: PropTypes.string.isRequired,
     rankings: PropTypes.object(PropTypes.string),
     stats: PropTypes.array(PropTypes.string)
-  }).isRequired,
-  onDelete: PropTypes.func.isRequired
+  }).isRequired
 };
 export default PostListItem;

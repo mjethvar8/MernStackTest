@@ -60,3 +60,11 @@ export function deletePostRequest(cuid) {
     );
   };
 }
+
+export function setSearchBar(keyword) {
+  return dispatch => {
+    return callApi("posts").then(res => {
+      dispatch(addPosts(res.posts));
+    });
+  };
+}
