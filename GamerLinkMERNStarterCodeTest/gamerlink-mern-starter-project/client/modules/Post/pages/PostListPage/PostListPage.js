@@ -9,7 +9,8 @@ import PostCreateWidget from "../../components/PostCreateWidget/PostCreateWidget
 import {
   addPostRequest,
   fetchPosts,
-  deletePostRequest
+  deletePostRequest,
+  fetchPost
 } from "../../PostActions";
 import { toggleAddPost } from "../../../App/AppActions";
 
@@ -24,42 +25,23 @@ class PostListPage extends Component {
   constructor() {
     super();
   }
+
   componentDidMount() {
     this.props.dispatch(fetchPosts());
   }
 
-  handleDeletePost = post => {
-    if (confirm("Do you want to delete this post")) {
-      // eslint-disable-line
-      this.props.dispatch(deletePostRequest(post));
-    }
-  };
-
-  handleAddPost = (name, title, content) => {
-    this.props.dispatch(toggleAddPost());
-    this.props.dispatch(addPostRequest({ name, title, content }));
-  };
-
   render() {
     return (
       <div className={styles["listView"]}>
-        <div className={styles["inputRow"]}>
-          <form>
-            <input
-              type="text"
-              className={styles["lookUpUser"]}
-              placeholder="Look up user"
-            />
-          </form>
-        </div>
-        <PostCreateWidget
-          addPost={this.handleAddPost}
-          showAddPost={this.props.showAddPost}
-        />
-        <PostList
-          handleDeletePost={this.handleDeletePost}
-          posts={this.props.posts}
-        />
+        <form>
+          <input
+            type="text"
+            className={styles["lookUpUser"]}
+            placeholder="Look up user"
+            onChange={evt => this.queryPosts(evt)}
+          />
+        </form>
+        <PostList posts={this.props.posts} />
       </div>
     );
   }
@@ -74,7 +56,6 @@ PostListPage.need = [
 // Retrieve data from store as props
 function mapStateToProps(state) {
   return {
-    showAddPost: getShowAddPost(state),
     posts: getPosts(state)
   };
 }

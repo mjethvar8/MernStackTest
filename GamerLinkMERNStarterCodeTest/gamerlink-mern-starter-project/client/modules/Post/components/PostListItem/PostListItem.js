@@ -18,7 +18,7 @@ function PostListItem(props) {
         <p>{props.post.lastUpdated}</p>
       </div>
       {props.post.stats.map(stat => (
-        <div className={styles["statsDiv"]}>
+        <div key={stat} className={styles["statsDiv"]}>
           <div className={styles["background"]}>
             <span className={styles["value"]}>{stat.wins}</span>
             <span className={styles["title"]}>Wins</span>
@@ -34,7 +34,7 @@ function PostListItem(props) {
         </div>
       ))}
       {props.post.rankings.map(ranks => (
-        <div className={styles["ranked"]}>
+        <div key={ranks.type} className={styles["ranked"]}>
           <div className={styles["rankType"]}>
             <p>{ranks.type}</p>
           </div>
