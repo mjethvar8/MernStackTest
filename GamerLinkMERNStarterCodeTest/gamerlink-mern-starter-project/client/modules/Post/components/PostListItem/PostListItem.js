@@ -1,4 +1,4 @@
-import React, { PropTypes } from "react";
+import React, { PropTypes, Component } from "react";
 import { Link } from "react-router";
 import { FormattedMessage } from "react-intl";
 
@@ -6,13 +6,16 @@ import { FormattedMessage } from "react-intl";
 import styles from "./PostListItem.css";
 
 function PostListItem(props) {
+  var utcSeconds = props.post.lastUpdated;
+  var date = new Date(utcSeconds * 1000);
+  var someDate = date.getMinutes();
   return (
     <div className={styles["single-post"]}>
       <div className={styles["heading"]}>
         <h3 className={styles["post-title"]}>{props.post.displayName}</h3>
       </div>
       <div className={styles["heading"]}>
-        <p>{props.post.lastUpdated}</p>
+        <p>Last Updated: {someDate} mins</p>
       </div>
       {props.post.stats.map(stat => (
         <div key={stat} className={styles["statsDiv"]}>
@@ -52,7 +55,7 @@ function PostListItem(props) {
                 </div>
                 <img
                   className={styles["img"]}
-                  src={require("./../../../../../../images/ranks/" +
+                  src={require("../../../../../../images/ranks/" +
                     ranks.rankImage +
                     ".png")}
                 />
@@ -61,7 +64,6 @@ function PostListItem(props) {
           </div>
         </div>
       ))}
-      <hr className={styles.divider} />
     </div>
   );
 }
