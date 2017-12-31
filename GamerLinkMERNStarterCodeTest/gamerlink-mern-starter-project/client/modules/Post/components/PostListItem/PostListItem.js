@@ -6,9 +6,10 @@ import { FormattedMessage } from "react-intl";
 import styles from "./PostListItem.css";
 
 function PostListItem(props) {
-  var utcSeconds = props.post.lastUpdated;
-  var date = new Date(utcSeconds * 1000);
-  var someDate = date.getMinutes();
+  let utcSeconds = props.post.lastUpdated;
+  let date = new Date(utcSeconds * 1000);
+  let someDate = date.getMinutes();
+
   return (
     <div className={styles["single-post"]}>
       <div className={styles["heading"]}>
